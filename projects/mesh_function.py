@@ -3,18 +3,30 @@ from collections.abc import Callable
 
 
 def mesh_function(f: Callable[[float], float], t: np.ndarray) -> np.ndarray:
-    raise NotImplementedError
+    #f(t)
+    ans = []
+    for i in t:
+        ans.append(f(i))
+    return ans
 
 
 def func(t: float) -> float:
-    raise NotImplementedError
+    if 0 <= t and t <= 3:
+        return np.exp(-t)
+    if 3 < t and t <= 5:
+        return np.exp(-3*t)
+    
 
+def plot():
+    pass
+    
 
 def test_mesh_function():
     t = np.array([1, 2, 3, 4])
     f = np.array([np.exp(-1), np.exp(-2), np.exp(-3), np.exp(-12)])
     fun = mesh_function(func, t)
     assert np.allclose(fun, f)
+
 
 if __name__ == "__main__":
     test_mesh_function()
